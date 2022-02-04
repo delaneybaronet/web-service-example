@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Distance Calculator</title>
+  </head>
+  <body>
+    <h2>Enter latitude and longitude</h2>
+    Place A
+    <input type="text" id="latA" placeholder="Place A lat" />
+    <input type="text" id="lonA" placeholder="Place A lon" />
+    <hr />
+    Place B
+    <input type="text" id="latB" placeholder="Place B lat" />
+    <input type="text" id="lonB" placeholder="Place B lon" />
+    <hr />
+    <input type="submit" id="submit" value="Calculate Distance (km)" />
+    <br /><br />
+    Distance:
+    <h1 id="output">0</h1>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $("#submit").click(function () {
+        // Read the text input boxes to get the user's coordinates, add them to the URL to request the web service
+        $.getJSON(
+          "https://jtc8v.sse.codesandbox.io/",
+          {
+            latA: $("#latA").val(),
+            lonA: $("#lonA").val(),
+            latB: $("#latB").val(),
+            lonB: $("#lonB").val()
+          },
+          // Receive the response from the web service, print the distance on the webpage
+          function (data) {
+            $("#output").html(data.distance);
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
